@@ -1,6 +1,6 @@
-const {
-  convertTimestampToDate
-} = require("../db/seeds/utils");
+const { convertTimestampToDate } = require("../db/seeds/utils");
+
+const {createRef} = require("../db/seeds/utils");
 
 describe("convertTimestampToDate", () => {
   test("returns a new object", () => {
@@ -38,3 +38,60 @@ describe("convertTimestampToDate", () => {
   });
 });
 
+describe("createRef", () => {
+  test("should return an empty object when passed an empty array", () => {
+    const input = [];
+    const result = createRef(input);
+    expect(result).toEqual({});
+  });
+
+  test("should return a ref object with a single key and value when passed with a single array", () => {
+    const input = [
+      {
+        article_id: 1,
+        title: "Living in the shadow of a great man",
+        topic: "mitch",
+        author: "butter_bridge",
+        body: "I find this existence challenging",
+        created_at: "2020-07-09T20:11:00.000z",
+        votes: 100,
+        article_img_url:
+          "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      },
+    ];
+    const result = createRef(input);
+    expect(result).toEqual({ "Living in the shadow of a great man": 1 });
+  });
+
+  test("should return a ref object with a multiple keys and values when passed with a multiple arrays", () => {
+    const input = [
+      {
+        article_id: 1,
+        title: "Living in the shadow of a great man",
+        topic: "mitch",
+        author: "butter_bridge",
+        body: "I find this existence challenging",
+        created_at: "2020-07-09T20:11:00.000z",
+        votes: 100,
+        article_img_url:
+          "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      },
+      {
+        article_id: 4,
+        title: "Student SUES Mitch!",
+        topic: "mitch",
+        author: "rogersop",
+        body: "We all love Mitch and his wonderful, unique typing style.  However, the volume of his typing has ALLEGEDLY burst another students eardrums, and they are now suing for damages",
+        created_at: "2020-05-06T01:14:00.000z",
+        votes: 0,
+        article_img_url:
+          "https://images.pexels.com/photos/158651/news-newsletter-newspaper-information-158651.jpeg?w=700&h=700",
+      },
+    ];
+    const result = createRef(input);
+    expect(result).toEqual({
+      "Living in the shadow of a great man": 1,
+      "Student SUES Mitch!": 4,
+    });
+  });
+});
