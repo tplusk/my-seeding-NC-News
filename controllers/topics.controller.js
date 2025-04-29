@@ -1,4 +1,3 @@
-const endpointsJson = require("../endpoints.json");
 const { selectTopics } = require("../models/topics.model");
 
 exports.getTopics = (req, res) => {
