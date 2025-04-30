@@ -60,6 +60,25 @@ describe("GET /api/articles/:article_id", () => {
         });
       });
   });
-  xtest("", () => {});
-  xtest("", () => {});
+});
+describe("GET /api/articles/chokito", () => {
+  test("400: Responds with bad request if sent an invalid ID", () => {
+    return request(app)
+      .get("/api/articles/chokito")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad request!");
+      });
+  });
+});
+
+xdescribe("GET /api/articles/987651", () => {
+  test("404: Responds with not found if trying to get a resource by a valid ID that does not exist in the database", () => {
+    return request(app)
+      .get("/api/articles/987651")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Not found!");
+      });
+  });
 });
