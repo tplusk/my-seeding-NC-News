@@ -42,7 +42,7 @@ describe("GET /api/topics", () => {
   });
 });
 
-describe("GET /api/articles/:article_id", () => {
+describe("GET /api/articles/1", () => {
   test("200: Responds with an article object with the correct properties", () => {
     return request(app)
       .get("/api/articles/1")
@@ -61,6 +61,8 @@ describe("GET /api/articles/:article_id", () => {
       });
   });
 });
+
+// Error handling
 describe("GET /api/articles/chokito", () => {
   test("400: Responds with bad request if sent an invalid ID", () => {
     return request(app)
@@ -72,7 +74,7 @@ describe("GET /api/articles/chokito", () => {
   });
 });
 
-xdescribe("GET /api/articles/987651", () => {
+describe("GET /api/articles/987651", () => {
   test("404: Responds with not found if trying to get a resource by a valid ID that does not exist in the database", () => {
     return request(app)
       .get("/api/articles/987651")
@@ -83,30 +85,30 @@ xdescribe("GET /api/articles/987651", () => {
   });
 });
 
-xdescribe("GET /api/articles", () => {
-  test("200: Responds with an articles array of article objects, each of which should have the correct properties, body property excluded in this case", () => {
-    return request(app)
-      .get("/api/articles")
-      .expect(200)
-      .then(({ body }) => {
-        body.articles.forEach((article) => {
-          expect(article).toMatchObject([
-            {
-              author: expect.any(String),
-              title: expect.any(String),
-              article_id: expect.any(Number),
-              topic: expect.any(String),
-              created_at: expect.any(String),
-              votes: expect.any(Number),
-              article_img_url: expect.any(String),
-              comment_count: expect.any(String),
-            },
-          ]);
-          expect(article).not.toHaveProperty("body");
-        });
-      });
-  });
-});
+// xdescribe("GET /api/articles", () => {
+//   test("200: Responds with an articles array of article objects, each of which should have the correct properties, body property excluded in this case", () => {
+//     return request(app)
+//       .get("/api/articles")
+//       .expect(200)
+//       .then(({ body }) => {
+//         body.articles.forEach((article) => {
+//           expect(article).toMatchObject([
+//             {
+//               author: expect.any(String),
+//               title: expect.any(String),
+//               article_id: expect.any(Number),
+//               topic: expect.any(String),
+//               created_at: expect.any(String),
+//               votes: expect.any(Number),
+//               article_img_url: expect.any(String),
+//               comment_count: expect.any(String),
+//             },
+//           ]);
+//           expect(article).not.toHaveProperty("body");
+//         });
+//       });
+//   });
+// });
 // xdescribe("artticles should be sorted by date in descending order", () => {
 //   test("", () => {})
 // })
