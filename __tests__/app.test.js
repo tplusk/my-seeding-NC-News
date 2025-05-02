@@ -2,7 +2,7 @@ const endpointsJson = require("../endpoints.json");
 const db = require("../db/connection");
 const seed = require("../db/seeds/seed");
 const data = require("../db/data/test-data");
-const app = require("../db/seeds/app");
+const app = require("../app");
 const request = require("supertest");
 /* Set up your test imports here */
 
@@ -62,7 +62,6 @@ describe("GET /api/articles/1", () => {
   });
 });
 
-// Error handling
 describe("GET /api/articles/chokito", () => {
   test("400: Responds with bad request if sent an invalid ID", () => {
     return request(app)
@@ -85,33 +84,25 @@ describe("GET /api/articles/987651", () => {
   });
 });
 
-// xdescribe("GET /api/articles", () => {
-//   test("200: Responds with an articles array of article objects, each of which should have the correct properties, body property excluded in this case", () => {
-//     return request(app)
-//       .get("/api/articles")
-//       .expect(200)
-//       .then(({ body }) => {
-//         body.articles.forEach((article) => {
-//           expect(article).toMatchObject([
-//             {
-//               author: expect.any(String),
-//               title: expect.any(String),
-//               article_id: expect.any(Number),
-//               topic: expect.any(String),
-//               created_at: expect.any(String),
-//               votes: expect.any(Number),
-//               article_img_url: expect.any(String),
-//               comment_count: expect.any(String),
-//             },
-//           ]);
-//           expect(article).not.toHaveProperty("body");
-//         });
-//       });
-//   });
-// });
-// xdescribe("artticles should be sorted by date in descending order", () => {
-//   test("", () => {})
-// })
-// xdescribe("", () => {
-//   test("", () => {})
-// })
+describe("GET /api/articles", () => {
+  test("200: Responds with an articles array of article objects, each of which should have the correct properties, body property excluded in this case", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then(({ body }) => {
+        body.articles.forEach((article) => {
+          expect(article).toMatchObject({
+            author: expect.any(String),
+            title: expect.any(String),
+            article_id: expect.any(Number),
+            topic: expect.any(String),
+            created_at: expect.any(String),
+            votes: expect.any(Number),
+            article_img_url: expect.any(String),
+            comment_count: expect.any(Number),
+          });
+          expect(article).not.toHaveProperty("body");
+        });
+      });
+  });
+});
