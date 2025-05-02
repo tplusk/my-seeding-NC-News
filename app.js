@@ -7,6 +7,7 @@ const {
   getArticleById,
   getArticles,
 } = require("./controllers/articles.controller");
+const { getCommentsByArticleId } = require("./controllers/comments.controller");
 
 app.get("/api", getApi);
 
@@ -16,31 +17,32 @@ app.get("/api/articles/:article_id", getArticleById);
 
 app.get("/api/articles", getArticles);
 
+app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
+
+app.all("/*splat", (req, res) => {
+  res.status(404).send({ msg: "Not Found!" });
+});
 // error handling
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err.status === 400) {
-    res.status(400).send({ msg: "Bad request!" });
+    res.status(400).send({ msg: "Bad Request!" });
   } else next(err);
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err.code === "22P02") {
-    res.status(400).send({ msg: "Bad request!" });
+    res.status(400).send({ msg: "Bad Request!" });
   } else next(err);
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
   if (err.status === 404) {
-    res.status(404).send({ msg: "Not found!" });
+    res.status(404).send({ msg: "Not Found!" });
   } else next(err);
 });
 
 app.use((err, req, res, next) => {
-  console.log(err);
-  res.status(500).send({ msg: "Internal server error!" });
+  res.status(500).send({ msg: "Internal Server Error!" });
 });
 
 module.exports = app;
