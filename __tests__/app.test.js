@@ -68,7 +68,7 @@ describe("GET /api/articles/chokito", () => {
       .get("/api/articles/chokito")
       .expect(400)
       .then(({ body }) => {
-        expect(body.msg).toBe("Bad request!");
+        expect(body.msg).toBe("Bad Request!");
       });
   });
 });
@@ -79,7 +79,7 @@ describe("GET /api/articles/987651", () => {
       .get("/api/articles/987651")
       .expect(404)
       .then(({ body }) => {
-        expect(body.msg).toBe("Not found!");
+        expect(body.msg).toBe("Not Found!");
       });
   });
 });
@@ -90,6 +90,7 @@ describe("GET /api/articles", () => {
       .get("/api/articles")
       .expect(200)
       .then(({ body }) => {
+        expect(body.articles.length > 0).toBe(true);
         body.articles.forEach((article) => {
           expect(article).toMatchObject({
             author: expect.any(String),
@@ -102,6 +103,27 @@ describe("GET /api/articles", () => {
             comment_count: expect.any(Number),
           });
           expect(article).not.toHaveProperty("body");
+        });
+      });
+  });
+});
+
+describe("GET /api/articles/1/comments", () => {
+  test("200: Responds with an array of comments for the given article_id of which each have the correct properties", () => {
+    return request(app)
+      .get("/api/articles/1/comments")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.comments.length > 0).toBe(true);
+        body.comments.forEach((comment) => {
+          expect(comment).toMatchObject({
+            comment_id: expect.any(Number),
+            votes: expect.any(Number),
+            created_at: expect.any(String),
+            author: expect.any(String),
+            body: expect.any(String),
+            article_id: expect.any(Number),
+          });
         });
       });
   });
