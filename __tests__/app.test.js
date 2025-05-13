@@ -90,7 +90,7 @@ describe("GET /api/articles", () => {
       .get("/api/articles")
       .expect(200)
       .then(({ body }) => {
-        expect(body.articles.length > 0).toBe(true);
+        expect(body.articles).toHaveLength(13);
         body.articles.forEach((article) => {
           expect(article).toMatchObject({
             author: expect.any(String),
@@ -114,7 +114,7 @@ describe("GET /api/articles/1/comments", () => {
       .get("/api/articles/1/comments")
       .expect(200)
       .then(({ body }) => {
-        expect(body.comments.length > 0).toBe(true);
+        expect(body.comments).toHaveLength(11);
         body.comments.forEach((comment) => {
           expect(comment).toMatchObject({
             comment_id: expect.any(Number),
@@ -128,3 +128,56 @@ describe("GET /api/articles/1/comments", () => {
       });
   });
 });
+
+describe("GET /api/articles/2348765/comments", () => {
+  test("404: Responds with not found, if the article doesn't exists yet or it has been deleted", () => {
+    return request(app)
+      .get("/api/articles/2348765/comments")
+      .expect(404)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Not Found!");
+      });
+  });
+});
+
+describe("GET /api/articles/notAnId/comments", () => {
+  test("400: Responds with bad request if sent an invalid id", () => {
+    return request(app)
+      .get("/api/articles/notAnId/comments")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body.msg).toBe("Bad Request!");
+      });
+  });
+});
+
+describe("POST /api/articles/:article_id/comments", () => {
+  test("201: Responds with the posted comment", () => {
+    const commentPost = { username: "icellusedkars", body: "nice one" };
+    return request(app)
+      .post("/api/articles/2/comments")
+      .send(commentPost)
+      .expect(201)
+      .then(({ body }) => {
+        expect(body.comment).toMatchObject({
+          comment_id: 19,
+          author: "icellusedkars",
+          body: "nice one",
+          article_id: 2,
+          votes: 0,
+          created_at: expect.any(String),
+        });
+      });
+  });
+});
+
+// describe("POST /api/articles/someArticle/comments", () => {
+//   test("400: Responds with a bad request if ", () => {
+//     return request(app)
+//       .post("/api/articles/someArticle/comments")
+//       .expect(400)
+//       .then(({ body }) => {
+//         expect(body);
+//       });
+//   });
+// });
