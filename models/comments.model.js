@@ -35,9 +35,7 @@ exports.insertCommentsByArticleId = (article_id, username, body) => {
     `INSERT INTO comments (article_id, author, body, votes) VALUES %L RETURNING *`,
     [[article_id, username, body, 0]]
   );
-  console.log(sqlString);
   return db.query(sqlString).then(({ rows }) => {
-    console.log("hello");
     return rows[0];
   });
 };
