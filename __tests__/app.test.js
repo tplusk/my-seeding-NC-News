@@ -170,7 +170,6 @@ describe("POST /api/articles/:article_id/comments", () => {
       });
   });
 });
-
 // describe("POST /api/articles/someArticle/comments", () => {
 //   test("400: Responds with a bad request if ", () => {
 //     return request(app)
