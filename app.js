@@ -7,7 +7,11 @@ const {
   getArticleById,
   getArticles,
 } = require("./controllers/articles.controller");
-const { getCommentsByArticleId } = require("./controllers/comments.controller");
+const {
+  getCommentsByArticleId,
+  postCommentsByArticleId,
+} = require("./controllers/comments.controller");
+app.use(express.json());
 
 app.get("/api", getApi);
 
@@ -19,9 +23,12 @@ app.get("/api/articles", getArticles);
 
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
+app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
+
 app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });
 });
+
 // error handling
 app.use((err, req, res, next) => {
   if (err.status === 400) {
