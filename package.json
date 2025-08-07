@@ -10,7 +10,8 @@
     "prepare": "husky install",
     "start": "node listen.js",
     "seed-prod": "NODE_ENV=production npm run seed-dev",
-    "test-seed": "jest seed.test.js"
+    "test-seed": "jest seed.test.js",
+    "dev": "nodemon listen.js"
   },
   "repository": {
     "type": "git",
@@ -27,7 +28,8 @@
     "husky": "^8.0.2",
     "jest": "^27.5.1",
     "jest-extended": "^2.0.0",
-    "supertest": "^7.1.1"
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
   },
   "dependencies": {
     "cors": "^2.8.5",

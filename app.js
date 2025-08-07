@@ -31,7 +31,6 @@ app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });
 });
 
-// error handling
 app.use((err, req, res, next) => {
   if (err.status === 400) {
     res.status(400).send({ msg: "Bad Request!" });

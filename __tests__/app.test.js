@@ -170,13 +170,13 @@ describe("POST /api/articles/:article_id/comments", () => {
       });
   });
 });
-// describe("POST /api/articles/someArticle/comments", () => {
-//   test("400: Responds with a bad request if ", () => {
-//     return request(app)
-//       .post("/api/articles/someArticle/comments")
-//       .expect(400)
-//       .then(({ body }) => {
-//         expect(body);
-//       });
-//   });
-// });
+describe("POST /api/articles/someArticle/comments", () => {
+  test("400: Responds with a bad request if ", () => {
+    return request(app)
+      .post("/api/articles/someArticle/comments")
+      .expect(400)
+      .then(({ body }) => {
+        expect(body);
+      });
+  });
+});
