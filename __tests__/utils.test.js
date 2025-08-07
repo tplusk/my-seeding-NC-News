@@ -1,6 +1,6 @@
 const { convertTimestampToDate } = require("../db/seeds/utils");
 
-const {createRef} = require("../db/seeds/utils");
+const { createRef } = require("../db/seeds/utils");
 
 describe("convertTimestampToDate", () => {
   test("returns a new object", () => {

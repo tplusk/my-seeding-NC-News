@@ -32,7 +32,7 @@ describe("GET /api/topics", () => {
       .get("/api/topics")
       .expect(200)
       .then(({ body }) => {
-        expect(body.topics.length).toBe(3);
+        expect(body.topics).toHaveLength(3);
         body.topics.forEach((topic) => {
           expect(topic).toHaveProperty("slug");
           expect(topic).toHaveProperty("description");
@@ -42,8 +42,25 @@ describe("GET /api/topics", () => {
   });
 });
 
+describe("GET /api/users", () => {
+  test("200: Responds with an objects with the key of users and the value of an array of objects. Each object has the following properties: username, name, and avatar_url.", () => {
+    return request(app)
+      .get("/api/users")
+      .expect(200)
+      .then(({ body }) => {
+        body.users.forEach((user) => {
+          expect(user).toMatchObject({
+            username: expect.any(String),
+            name: expect.any(String),
+            avatar_url: expect.any(String),
+          });
+        });
+      });
+  });
+});
+
 describe("GET /api/articles/1", () => {
-  test("200: Responds with an article object with the correct properties", () => {
+  test("200: Responds with an object with the key of article and the value of an article object, which should have the following properties: author, title, article_id, body, topic, created_at, votes, article_img_url.", () => {
     return request(app)
       .get("/api/articles/1")
       .expect(200)
@@ -109,7 +126,7 @@ describe("GET /api/articles", () => {
 });
 
 describe("GET /api/articles/1/comments", () => {
-  test("200: Responds with an array of comments for the given article_id of which each have the correct properties", () => {
+  test("200: Responds with an object with the key of comments and the value of an array of comments for the given article_id. Each comment has the following properties: comment_id, votes, created_at, author, body, article_id.", () => {
     return request(app)
       .get("/api/articles/1/comments")
       .expect(200)
@@ -174,9 +191,10 @@ describe("POST /api/articles/someArticle/comments", () => {
   test("400: Responds with a bad request if ", () => {
     return request(app)
       .post("/api/articles/someArticle/comments")
+      .send({ username: "grumpy19" })
       .expect(400)
       .then(({ body }) => {
-        expect(body);
+        expect(body.msg).toBe("Bad Request!");
       });
   });
 });

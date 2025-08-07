@@ -2,8 +2,12 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const db = require("./db/connection");
+
 const { getApi } = require("./controllers/api.controller");
 const { getTopics } = require("./controllers/topics.controller");
+
+const { getUsers } = require("./controllers/users.controller");
+
 const {
   getArticleById,
   getArticles,
@@ -12,12 +16,15 @@ const {
   getCommentsByArticleId,
   postCommentsByArticleId,
 } = require("./controllers/comments.controller");
+
 app.use(cors());
 app.use(express.json());
 
 app.get("/api", getApi);
 
 app.get("/api/topics", getTopics);
+
+app.get("/api/users", getUsers);
 
 app.get("/api/articles/:article_id", getArticleById);
 
