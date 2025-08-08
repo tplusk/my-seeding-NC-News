@@ -76,7 +76,7 @@
   },
 
   "POST /api/articles/:article_id/comments": {
-    "description": "adds a comment by article_id",
+    "description": "Responds with the posted comment.",
     "exampleResponse": {
       "comment": {
         "username": "sugababy0986234",

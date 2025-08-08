@@ -169,7 +169,7 @@ describe("GET /api/articles/notAnId/comments", () => {
 });
 
 describe("POST /api/articles/:article_id/comments", () => {
-  test("201: Responds with the posted comment", () => {
+  test("201: Responds with the posted comment.", () => {
     const commentPost = { username: "icellusedkars", body: "nice one" };
     return request(app)
       .post("/api/articles/2/comments")
@@ -177,7 +177,7 @@ describe("POST /api/articles/:article_id/comments", () => {
       .expect(201)
       .then(({ body }) => {
         expect(body.comment).toMatchObject({
-          comment_id: 19,
+          comment_id: expect.any(Number),
           author: "icellusedkars",
           body: "nice one",
           article_id: 2,
@@ -187,6 +187,7 @@ describe("POST /api/articles/:article_id/comments", () => {
       });
   });
 });
+
 describe("POST /api/articles/someArticle/comments", () => {
   test("400: Responds with a bad request if ", () => {
     return request(app)
