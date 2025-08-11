@@ -15,6 +15,7 @@ const {
 const {
   getCommentsByArticleId,
   postCommentsByArticleId,
+  updateArticleVotes,
 } = require("./controllers/comments.controller");
 
 app.use(cors());
@@ -32,8 +33,9 @@ app.get("/api/articles", getArticles);
 
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
-// not available online yet
 app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
+
+app.patch("/api/articles/:article_id", updateArticleVotes);
 
 app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });
