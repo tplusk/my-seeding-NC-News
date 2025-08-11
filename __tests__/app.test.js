@@ -199,3 +199,17 @@ describe("POST /api/articles/someArticle/comments", () => {
       });
   });
 });
+
+describe("PATCH /api/articles/1", () => {
+  test("200: responds with the updated article with incremented votes", () => {
+    return request(app)
+      .patch("/api/articles/1")
+      .send({ inc_votes: 5 })
+      .expect(200)
+      .then(({ body }) => {
+        const { article } = body;
+        expect(article.article_id).toBe(1);
+        expect(article.votes).toBe(105);
+      });
+  });
+});
