@@ -5,12 +5,11 @@ const db = require("./db/connection");
 
 const { getApi } = require("./controllers/api.controller");
 const { getTopics } = require("./controllers/topics.controller");
-
 const { getUsers } = require("./controllers/users.controller");
-
 const {
   getArticleById,
   getArticles,
+  getArticlesSortBy,
 } = require("./controllers/articles.controller");
 const {
   getCommentsByArticleId,
@@ -39,6 +38,8 @@ app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
 app.patch("/api/articles/:article_id", updateArticleVotes);
 
 app.delete("/api/comments/:comment_id", deleteCommentByCommentId);
+
+app.get("/api/articles/:sort_by", getArticlesSortBy);
 
 app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });

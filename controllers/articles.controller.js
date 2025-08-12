@@ -2,6 +2,7 @@ const {
   selectArticleById,
   selectArticles,
   sendCommentByArticleId,
+  sortArticles,
 } = require("../models/articles.model");
 
 exports.getArticleById = (req, res, next) => {
@@ -26,4 +27,9 @@ exports.postCommentByArticleId = (req, res, next) => {
       res.status(201).send({ comment });
     })
     .catch(next);
+};
+
+exports.getArticlesSortBy = (req, res, next) => {
+  const { sort_by = "created_at", order = "desc" } = req.query;
+  res.status(200).send({ msg: `Sorting by ${sort_by} in ${order} order.` });
 };
