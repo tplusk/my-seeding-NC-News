@@ -43,3 +43,36 @@ exports.sendCommentByArticleId = (article_id, username, body) => {
       return rows[0];
     });
 };
+
+exports.sortArticles = (sort_by = "created_at", order = "desc") => {
+  const validColumns = [
+    "article_id",
+    "title",
+    "author",
+    "created_at",
+    "votes",
+    "topic",
+  ];
+  const validOrders = ["asc", "desc"];
+  if (!validSortColumns.includes(sort_by)) {
+    return Promise.reject({
+      status: 400,
+      msg: `Invalid sort_by query. Must be one of: ${validSortColumns.join(
+        ", "
+      )}`,
+    });
+  }
+
+  order = order.toLowerCase();
+  if (!validOrders.includes(order)) {
+    return Promise.reject({
+      status: 400,
+      msg: "Invalid order query. Must be 'asc' or 'desc'.",
+    });
+  }
+  return db
+    .query(
+      `SELECT article_id, title, author, created_at, votes, topic FROM articles ORDER BY $(sort_by) $(order);`
+    )
+    .then(({ rows }) => rows);
+};

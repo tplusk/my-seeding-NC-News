@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/northcoders/be-nc-news#readme",
   "devDependencies": {
+    "@netly/jest-sorted-by": "^1.0.6",
     "husky": "^8.0.2",
     "jest": "^27.5.1",
     "jest-extended": "^2.0.0",
@@ -40,7 +41,8 @@
   },
   "jest": {
     "setupFilesAfterEnv": [
-      "jest-extended/all"
+      "jest-extended/all",
+      "@netly/jest-sorted-by"
     ]
   }
 }

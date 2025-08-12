@@ -4,9 +4,7 @@ const seed = require("../db/seeds/seed");
 const data = require("../db/data/test-data");
 const app = require("../app");
 const request = require("supertest");
-/* Set up your test imports here */
 
-/* Set up your beforeEach & afterAll functions here */
 beforeEach(() => {
   return seed(data);
 });
@@ -253,6 +251,25 @@ describe("DELETE /api/comments/2", () => {
       })
       .then((result) => {
         expect(result.rowCount).toBe(0);
+      });
+  });
+});
+
+describe("GET /api/articles with sorting queries.)", () => {
+  test("200: should default to sort by created_at in descending order", () => {
+    return request(app)
+      .get("/api/articles")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toBeSortedBy("created_at", { descending: true });
+      });
+  });
+  test("200: should sort by specified column in ascending order", () => {
+    return request(app)
+      .get("/api/articles?sort_by=votes&order=asc")
+      .expect(200)
+      .then(({ body }) => {
+        expect(body.articles).toBeSortedBy("votes", { descending: false });
       });
   });
 });
