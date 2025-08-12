@@ -213,3 +213,46 @@ describe("PATCH /api/articles/1", () => {
       });
   });
 });
+
+describe("PATCH /api/articles/1", () => {
+  test("200: responds with the updated article with incremented votes", () => {
+    return request(app)
+      .patch("/api/articles/1")
+      .send({ inc_votes: 1 })
+      .expect(200)
+      .then(({ body }) => {
+        const { article } = body;
+        expect(article.article_id).toBe(1);
+        expect(article.votes).toBe(101);
+      });
+  });
+});
+
+describe("PATCH /api/articles/1", () => {
+  test("200: responds with the updated article with decremented votes", () => {
+    return request(app)
+      .patch("/api/articles/1")
+      .send({ inc_votes: -50 })
+      .expect(200)
+      .then(({ body }) => {
+        const { article } = body;
+        expect(article.article_id).toBe(1);
+        expect(article.votes).toBe(50);
+      });
+  });
+});
+
+describe("DELETE /api/comments/2", () => {
+  test("204: Responds with status 204 and no content when successfully deleted.", () => {
+    return request(app)
+      .delete("/api/comments/2")
+      .expect(204)
+      .then((response) => {
+        expect(response.body).toEqual({});
+        return db.query(`SELECT FROM comments WHERE comment_id = 2`);
+      })
+      .then((result) => {
+        expect(result.rowCount).toBe(0);
+      });
+  });
+});

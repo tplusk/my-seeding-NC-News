@@ -16,6 +16,7 @@ const {
   getCommentsByArticleId,
   postCommentsByArticleId,
   updateArticleVotes,
+  deleteCommentByCommentId,
 } = require("./controllers/comments.controller");
 
 app.use(cors());
@@ -36,6 +37,8 @@ app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
 
 app.patch("/api/articles/:article_id", updateArticleVotes);
+
+app.delete("/api/comments/:comment_id", deleteCommentByCommentId);
 
 app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });
