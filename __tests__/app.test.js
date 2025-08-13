@@ -273,3 +273,15 @@ describe("GET /api/articles with sorting queries.)", () => {
       });
   });
 });
+
+describe("GET /api/articles/:article_id", () => {
+  test("200: responds with article object including comment_count", () => {
+    return request(app)
+      .get("/api/articles/1")
+      .expect(200)
+      .then(({ body }) => {
+        const article = body.article;
+        expect(article).toHaveProperty("comment_count", expect.any(Number));
+      });
+  });
+});

@@ -131,5 +131,21 @@
         }
       ]
     }
+  },
+  "GET /api/articles/:article_id (comment_count)": {
+    "description": "Responds with articles by comment count.",
+    "exampleResponse": {
+      "article": {
+        "article_id": 1,
+        "title": "Running a Node App",
+        "topic": "coding",
+        "author": "jessjelly",
+        "body": "This is the body text...",
+        "created_at": "2020-11-07T06:03:00.000Z",
+        "votes": 0,
+        "article_img_url": "https://url-to-image.jpg",
+        "comment_count": 8
+      }
+    }
   }
 }
