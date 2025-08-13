@@ -20,6 +20,7 @@ const { sortArticlesByTopic } = require("./models/articles.model");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
 
 app.get("/api", getApi);
 
