@@ -72,7 +72,7 @@ my-seeding-NC-News/
 ├── app.js
 ```
 
-# 📰 API Documentation
+# API Documentation
 
 A RESTful API providing access to topics, articles, users, and comments. Once the server is running, you can access the API documentation. This will provide details about all available endpoints, accepted queries, and example responses.
 
@@ -92,5 +92,42 @@ A RESTful API providing access to topics, articles, users, and comments. Once th
 | **PATCH**  | `/api/articles/:article_id`          | Update article votes                          |
 | **PATCH**  | `/api/comments/:comment_id`          | Update comment votes                          |
 | **DELETE** | `/api/comments/:comment_id`          | Delete a comment                              |
+
+---
+
+## Tech Stack
+
+- **Node.js / Express.js** – RESTful API framework
+- **PostgreSQL** – Relational database implementation
+- **Jest / Supertest** – Automated testing suite
+- **Nodemon** – Development server with hot reloading
+- **dotenv** – Environment configuration
+- **Husky** – Git hooks integration for quality control
+
+---
+
+## Skills
+
+### **Test-Driven Development (TDD)**
+
+- Writing tests **before** implementing functionality
+- Test coverage includes:
+  - API endpoints
+  - Edge cases
+  - Error handling
+  - Data validation
+  - Password hashing
+
+### **MVC Architecture**
+
+- Clear separation of **Models**, **Views**, and **Controllers** for maintainability
+
+### **RESTful Design**
+
+- Following REST principles for clean, consistent API endpoints
+
+### **Incremental Development**
+
+- Features developed in small increments with **Git** version control
 
 ---
