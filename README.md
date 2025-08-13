@@ -9,29 +9,29 @@ Live demo: [NC News on Render](https://my-seeding-nc-news.onrender.com)
 
 ### Clone the Repository
 
-```bash
 git clone https://github.com/tplusk/my-seeding-NC-News
 cd my-seeding-NC-News
+
 Install Dependencies
 npm install
+
 Environment Variables
 Create two .env files in the root directory:
 
 For development (.env.development)
-
 PGDATABASE=nc_news
-For testing (.env.test)
 
+For testing (.env.test)
 PGDATABASE=nc_news_test
+
 Database Setup & Seeding
 Run the following commands to set up and populate the database:
-
 npm run setup-dbs
 npm run seed-dev
-Running Tests
-To execute the full test suite:
 
+Running tests to execute the full test suite:
 npm test
+
 Local Development
 Start the local development server:
 
@@ -42,10 +42,8 @@ Project Structure
 my-seeding-NC-News/
 │
 ├── db/
-├── __tests__/
+├── **tests**/
 ├── controllers/
 ├── models/
 ├── routes/
 ├── app.js
-
-```
