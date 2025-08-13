@@ -40,6 +40,8 @@ The server will be running on http://localhost:3000 by default.
 
 Project Structure
 my-seeding-NC-News/
+
+```bash
 │
 ├── db/
 ├── **tests**/
@@ -47,3 +49,4 @@ my-seeding-NC-News/
 ├── models/
 ├── routes/
 ├── app.js
+```
