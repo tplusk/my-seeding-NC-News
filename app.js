@@ -9,7 +9,6 @@ const { getUsers } = require("./controllers/users.controller");
 const {
   getArticleById,
   getArticles,
-  getArticlesSortBy,
 } = require("./controllers/articles.controller");
 const {
   getCommentsByArticleId,
@@ -17,6 +16,7 @@ const {
   updateArticleVotes,
   deleteCommentByCommentId,
 } = require("./controllers/comments.controller");
+const { sortArticlesByTopic } = require("./models/articles.model");
 
 app.use(cors());
 app.use(express.json());
@@ -25,11 +25,18 @@ app.get("/api", getApi);
 
 app.get("/api/topics", getTopics);
 
-app.get("/api/users", getUsers);
+app.get("/api/articles", getArticles);
 
 app.get("/api/articles/:article_id", getArticleById);
 
-app.get("/api/articles", getArticles);
+app.get("/api/articles/:topic", (req, res, next) => {
+  const { topic } = req.params;
+  sortArticlesByTopic(topic)
+    .then((articles) => res.status(200).send({ articles }))
+    .catch(next);
+});
+
+app.get("/api/users", getUsers);
 
 app.get("/api/articles/:article_id/comments", getCommentsByArticleId);
 
@@ -38,8 +45,6 @@ app.post("/api/articles/:article_id/comments", postCommentsByArticleId);
 app.patch("/api/articles/:article_id", updateArticleVotes);
 
 app.delete("/api/comments/:comment_id", deleteCommentByCommentId);
-
-app.get("/api/articles/:sort_by", getArticlesSortBy);
 
 app.all("/*splat", (req, res) => {
   res.status(404).send({ msg: "Not Found!" });
