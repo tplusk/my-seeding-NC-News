@@ -1,34 +1,51 @@
-## NC News Seeding
+# NC News
 
-https://my-seeding-nc-news.onrender.com
+A full-stack news application that allows users to read articles, comment, and interact with content.  
+Live demo: [NC News on Render](https://my-seeding-nc-news.onrender.com)
 
-##Setup
+---
 
-#Installation
+## Setup & Installation
 
-1. Clone the repository from https://github.com/tplusk/my-seeding-NC-News
+### Clone the Repository
 
-2. Install dependencies:
-   npm install
-3. Set up environment variables:
-   Create two .env files in the root directory:
+```bash
+git clone https://github.com/tplusk/my-seeding-NC-News
+cd my-seeding-NC-News
+Install Dependencies
+npm install
+Environment Variables
+Create two .env files in the root directory:
 
-#For development:
+For development (.env.development)
 
-// .env.development
-PGDATABASE=dev_dialogue
+PGDATABASE=nc_news
+For testing (.env.test)
 
-#For testing:
+PGDATABASE=nc_news_test
+Database Setup & Seeding
+Run the following commands to set up and populate the database:
 
-// .env.test
-PGDATABASE=dev_dialogue_test 4. Set up and seed the database:
 npm run setup-dbs
 npm run seed-dev
 Running Tests
-Run the test suite with:
+To execute the full test suite:
 
 npm test
 Local Development
-To run the server locally:
+Start the local development server:
 
 npm start
+The server will be running on http://localhost:3000 by default.
+
+Project Structure
+my-seeding-NC-News/
+│
+├── db/
+├── __tests__/
+├── controllers/
+├── models/
+├── routes/
+├── app.js
+
+```
