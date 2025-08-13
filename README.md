@@ -71,3 +71,26 @@ my-seeding-NC-News/
 ├── routes/
 ├── app.js
 ```
+
+# 📰 API Documentation
+
+A RESTful API providing access to topics, articles, users, and comments. Once the server is running, you can access the API documentation. This will provide details about all available endpoints, accepted queries, and example responses.
+
+---
+
+## Endpoints
+
+| Method     | Endpoint                             | Description                                   |
+| ---------- | ------------------------------------ | --------------------------------------------- |
+| **GET**    | `/api`                               | API documentation                             |
+| **GET**    | `/api/topics`                        | Get all topics                                |
+| **GET**    | `/api/articles`                      | Get all articles (supports filters & sorting) |
+| **GET**    | `/api/articles/:article_id`          | Get specific article by ID                    |
+| **GET**    | `/api/articles/:article_id/comments` | Get comments for a specific article           |
+| **GET**    | `/api/users`                         | Get all users                                 |
+| **POST**   | `/api/articles/:article_id/comments` | Post a new comment to an article              |
+| **PATCH**  | `/api/articles/:article_id`          | Update article votes                          |
+| **PATCH**  | `/api/comments/:comment_id`          | Update comment votes                          |
+| **DELETE** | `/api/comments/:comment_id`          | Delete a comment                              |
+
+---
