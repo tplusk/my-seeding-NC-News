@@ -1,50 +1,89 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Fira Code", "Courier New", monospace;
   line-height: 1.6;
   margin: 0;
   padding: 0;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
 }
+
 header,
 nav,
 main,
 footer {
   padding: 1em;
 }
+
+header {
+  background-color: #252526;
+  border-bottom: 2px solid #3c3c3c;
+  color: #4ec9b0;
+  font-weight: bold;
+}
+
+footer {
+  background: #252526;
+  color: #6a9955;
+  text-align: center;
+}
+
 nav ul {
   list-style: none;
   padding: 0;
 }
+
 nav ul li {
   margin: 0.5em 0;
 }
+
 nav a {
   text-decoration: none;
-  color: #0366d6;
+  color: #569cd6;
+  font-weight: bold;
+  transition: color 0.2s ease;
 }
+
 nav a:hover {
-  text-decoration: underline;
+  color: #dcdcaa;
 }
+
 section {
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #3c3c3c;
   padding-bottom: 1em;
   margin-bottom: 1em;
 }
+
 pre {
-  background: #f4f4f4;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
   padding: 1em;
-  border-radius: 5px;
+  border-radius: 6px;
   overflow-x: auto;
+  border: 1px solid #3c3c3c;
+  font-size: 0.95em;
 }
+
 table {
   border-collapse: collapse;
   width: 100%;
   margin: 1em 0;
 }
+
 table,
 th,
 td {
-  border: 1px solid #ddd;
+  border: 1px solid #3c3c3c;
 }
+
+th {
+  background: #252526;
+  color: #c586c0;
+}
+
+td {
+  background: #1e1e1e;
+}
+
 th,
 td {
   padding: 0.5em;
