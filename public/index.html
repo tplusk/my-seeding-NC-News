@@ -3,7 +3,204 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NC NEWS</title>
+    <title>NC News API Documentation</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1 flexbox="title">NC News</h1>
+      <p>
+        A full-stack news application that allows users to read articles,
+        comment, and interact with content.
+      </p>
+      <nav>
+        <h3>List of available endpoints:</h3>
+        <ul>
+          <li><a href="#get-api">GET /api</a></li>
+          <li><a href="#get-topics">GET /api/topics</a></li>
+          <li><a href="#get-articles">GET /api/articles</a></li>
+          <li>
+            <a href="#get-article-by-id">GET /api/articles/:article_id</a>
+          </li>
+          <li>
+            <a href="#get-article-comments"
+              >GET /api/articles/:article_id/comments</a
+            >
+          </li>
+          <li><a href="#get-users">GET /api/users</a></li>
+          <li>
+            <a href="#post-comment">POST /api/articles/:article_id/comments</a>
+          </li>
+          <li><a href="#patch-article">PATCH /api/articles/:article_id</a></li>
+          <li><a href="#patch-comment">PATCH /api/comments/:comment_id</a></li>
+          <li>
+            <a href="#delete-comment">DELETE /api/comments/:comment_id</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section id="get-api">
+        <h2>GET /api</h2>
+        <p>Returns API documentation overview.</p>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "endpoints": [
+    { "method": "GET", "path": "/api", "description": "API documentation" }
+  ]
+}</pre
+        >
+      </section>
+
+      <section id="get-topics">
+        <h2>GET /api/topics</h2>
+        <p>Retrieves a list of all available topics.</p>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "topics": [
+    { "slug": "coding", "description": "Code-related news" }
+  ]
+}</pre
+        >
+      </section>
+
+      <section id="get-articles">
+        <h2>GET /api/articles</h2>
+        <p>
+          Retrieves all articles. Supports filtering & sorting via query
+          parameters.
+        </p>
+        <h3>Query Parameters</h3>
+        <table>
+          <tr>
+            <th>Parameter</th>
+            <th>Type</th>
+            <th>Description</th>
+          </tr>
+          <tr>
+            <td>topic</td>
+            <td>string</td>
+            <td>Filter articles by topic</td>
+          </tr>
+          <tr>
+            <td>sort_by</td>
+            <td>string</td>
+            <td>Field to sort by (e.g., created_at)</td>
+          </tr>
+          <tr>
+            <td>order</td>
+            <td>string</td>
+            <td>Sort order (asc/desc)</td>
+          </tr>
+        </table>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "articles": [
+    { "article_id": 1, "title": "Intro to APIs", "votes": 10 }
+  ]
+}</pre
+        >
+      </section>
+
+      <section id="get-article-by-id">
+        <h2>GET /api/articles/:article_id</h2>
+        <p>Retrieves a specific article by its ID.</p>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "article": { "article_id": 1, "title": "Intro to APIs", "votes": 10 }
+}</pre
+        >
+      </section>
+
+      <section id="get-article-comments">
+        <h2>GET /api/articles/:article_id/comments</h2>
+        <p>Retrieves all comments for a given article.</p>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "comments": [
+    { "comment_id": 1, "body": "Great article!", "votes": 3 }
+  ]
+}</pre
+        >
+      </section>
+
+      <section id="get-users">
+        <h2>GET /api/users</h2>
+        <p>Retrieves all users.</p>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "users": [
+    { "username": "kevingarnett", "name": "Kevin Garnett" }
+  ]
+}</pre
+        >
+      </section>
+
+      <section id="post-comment">
+        <h2>POST /api/articles/:article_id/comments</h2>
+        <p>Posts a new comment to a specific article.</p>
+        <h3>Request Body</h3>
+        <pre>
+{
+  "username": "jerryrice",
+  "body": "This article is awesome!"
+}</pre
+        >
+        <h3>Example Response</h3>
+        <pre>
+{
+  "comment": {
+    "comment_id": 2,
+    "body": "This article is awesome!",
+    "votes": 0
+  }
+}</pre
+        >
+      </section>
+
+      <section id="patch-article">
+        <h2>PATCH /api/articles/:article_id</h2>
+        <p>Updates the vote count for a specific article.</p>
+        <h3>Request Body</h3>
+        <pre>{ "inc_votes": 1 }</pre>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "article": { "article_id": 1, "votes": 11 }
+}</pre
+        >
+      </section>
+
+      <section id="patch-comment">
+        <h2>PATCH /api/comments/:comment_id</h2>
+        <p>Updates the vote count for a specific comment.</p>
+        <h3>Request Body</h3>
+        <pre>{ "inc_votes": -1 }</pre>
+        <h3>Example Response</h3>
+        <pre>
+{
+  "comment": { "comment_id": 1, "votes": 2 }
+}</pre
+        >
+      </section>
+
+      <section id="delete-comment">
+        <h2>DELETE /api/comments/:comment_id</h2>
+        <p>Deletes a specific comment. Returns no content.</p>
+        <h3>Example Response</h3>
+        <pre>{}</pre>
+      </section>
+    </main>
+
+    <footer>
+      <p>© 2025 NC News API Project</p>
+    </footer>
+  </body>
 </html>
